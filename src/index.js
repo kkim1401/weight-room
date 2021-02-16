@@ -19,7 +19,6 @@ const server = new ApolloServer({
 
 server
   .listen({
-    host: process.env.HOSTNAME,
     port: process.env.PORT,
   })
   .then(({ url }) => {
