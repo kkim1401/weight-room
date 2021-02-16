@@ -5,7 +5,7 @@ function dev() {
 }
 
 function start() {
-  return sh('node -r dotenv/config -r esm src/index.js', { nopipe: true });
+  return sh('node -r esm src/index.js', { nopipe: true });
 }
 
 module.exports = {
