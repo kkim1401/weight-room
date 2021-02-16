@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Exercise {
+  category        String?
+  date            DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  max             Int?
+  name            String
+  primaryMuscle   String?
+  secondaryMuscle String?
+  /// @onDelete(CASCADE)
+  sets            Set[]
+}
+
+model Set {
+  date       DateTime @default(now())
+  exercise   Exercise @relation(references: [id], fields: [exerciseId])
+  exerciseId Int
+  id         Int      @id @default(autoincrement())
+  notes      String?
+  percentage Float?
+  reps       Int
+  rpe        Float?
+  weight     Float?
+  workout    Workout  @relation(fields: [workoutId], references: [id])
+  workoutId  Int
+}
+
+model Workout {
+  id   Int      @id @default(autoincrement())
+  name String?
+  date DateTime @default(now())
+  /// @onDelete(CASCADE)
+  sets Set[]
+}
