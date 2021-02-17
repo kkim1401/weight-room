@@ -1,17 +1,13 @@
 const { sh } = require('tasksfile');
 
 function up() {
-  return sh('prisma migrate up --experimental', {
-    async: true,
-    nopipe: true,
-  });
-}
-
-function save() {
-  return sh('prisma migrate save --experimental', {
-    async: true,
-    nopipe: true,
-  });
+  return sh(
+    'prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma',
+    {
+      async: true,
+      nopipe: true,
+    }
+  );
 }
 
 function generate() {
@@ -22,7 +18,7 @@ function generate() {
 }
 
 async function update() {
-  await save();
+  // await save();
   await up();
   await generate();
 }
@@ -33,7 +29,6 @@ function studio() {
 
 module.exports = {
   generate,
-  save,
   studio,
   up,
   update,
