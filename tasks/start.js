@@ -5,7 +5,7 @@ function dev() {
 }
 
 function start() {
-  sh('node -r esm src/index.js', { nopipe: true });
+  return sh('node -r esm src/index.js', { nopipe: true });
 }
 
 module.exports = {
