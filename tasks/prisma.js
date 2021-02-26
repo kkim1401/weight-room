@@ -1,27 +1,29 @@
 const { sh } = require('tasksfile');
+const schema = 'src/prisma/schema.prisma';
 
 function deploy() {
-  return sh(
-    'prisma migrate deploy --preview-feature --schema=src/prisma/schema.prisma',
-    {
-      async: true,
-      nopipe: true,
-    }
-  );
+  return sh(`prisma migrate deploy --preview-feature --schema=${schema}`, {
+    async: true,
+    nopipe: true,
+  });
 }
 
 function dev() {
-  return sh(
-    'prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma',
-    {
-      async: true,
-      nopipe: true,
-    }
-  );
+  return sh(`prisma migrate dev --preview-feature --schema=${schema}`, {
+    async: true,
+    nopipe: true,
+  });
 }
 
 function generate() {
-  return sh('prisma generate --schema=src/prisma/schema.prisma', {
+  return sh(`prisma generate --schema=${schema}`, {
+    async: true,
+    nopipe: true,
+  });
+}
+
+function push() {
+  return sh(`prisma db push --preview-feature --schema=${schema}`, {
     async: true,
     nopipe: true,
   });
@@ -35,5 +37,6 @@ module.exports = {
   deploy,
   dev,
   generate,
+  push,
   studio,
 };
