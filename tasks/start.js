@@ -1,12 +1,12 @@
 const { sh } = require('tasksfile');
-const { dev } = require('./prisma');
+const prisma = require('./prisma');
 
 function dev() {
   return sh('nodemon -r dotenv/config -r esm src/index.js', { nopipe: true });
 }
 
 async function start() {
-  await dev();
+  await prisma.deploy();
   await sh('node -r esm src/index.js', { nopipe: true });
 }
 
