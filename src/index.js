@@ -8,6 +8,7 @@ import Workout from './types/Workout';
 
 const server = new ApolloServer({
   context: createContext,
+  introspection: true,
   playground: true,
   resolvers: merge.all([
     Core.resolvers,
