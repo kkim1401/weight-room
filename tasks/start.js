@@ -7,6 +7,8 @@ function dev() {
 
 async function start() {
   await prisma.deploy();
+  // Normally don't need to do this but Heroku isn't generating the client during postinstall.
+  await prisma.generate();
   await sh('node -r esm src/index.js', { nopipe: true });
 }
 
