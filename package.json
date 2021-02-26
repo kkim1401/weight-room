@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node tasks start:dev",
+    "heroku-postbuild": "node tasks heroku:postbuild",
     "start": "node tasks start",
     "tasks": "node tasks"
   },
